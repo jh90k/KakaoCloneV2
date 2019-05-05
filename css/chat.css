@@ -1,0 +1,248 @@
+.header-wrapper {
+  position: fixed;
+  z-index: 2;
+  top: 0px;
+  width: 100%;
+  padding: 5px 0px;
+  background-color: white;
+  box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.3),
+    0 -6px 16px -6px rgba(0, 0, 0, 0.025);
+}
+
+.chats-body {
+  padding: 10px 0px;
+  padding-top: 100px;
+  /*padding-top이 없으면 chats-body 위에 status-bar와 header가 올라간 것처럼 됨.
+  헤더의 높이 만큼을 패딩으로 설정해 chats-body를 밑으로 내림
+  이 상태로는 채팅방의 스크롤이 내려가지 않기 떄문에 밑에 있는 
+  .chats-body의 vh를 더 크게 해서 조정*/
+}
+
+.chats-body {
+  background-image: url(../images/chatBg.png);
+  /*이미지가 배경 가득 차도록 하기 위해 body에 클래스 이름 부여하고
+  chats-body클래스에서 패딩 설정 삭제(제일 위 확인)*/
+  min-height: 1000vh;
+  /*chat class가 적용된 div에 viewport(screen)의 100% 높이 부여*/
+}
+
+.chats-body .header,
+.chats-body .status-bar {
+  padding: 0px 20px;
+}
+
+.chat__write-container {
+  position: fixed;
+  bottom: 0;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  /*position:fixed가 적용된 container를 가운데 정렬하려면 margin~right 행까지 활용*/
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /*padding: 0px 20px;*/
+  width: 100%;
+  /*border-radius: 40px;
+  box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25),
+    0 8px 16px -8px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);*/
+  /*shadow에서 첫번째 값은 수평값으로 0보다 크면 오른쪽에 그림자 생김,
+  두번째 값은 수직값으로 0보다 크면 아래쪽에 그림자 생김 
+  세번째 값은 blur로 클 수록 뿌옇게 됨
+  rgba의 마지막 값은 opacity로 작을 수록 옅어짐
+  (수평값,수직값,블러값,색상) 조합을 하나 더 하면 그림자 또 만들 수 있음*/
+}
+
+.chat__icon-left {
+  position: absolute;
+  left: 10px;
+}
+
+.chat__icon-right {
+  position: absolute;
+  right: 10px;
+}
+
+.chat__write i {
+  font-size: 22px;
+}
+.chat__write-column:nth-child(2) {
+  width: 80%;
+}
+
+/*
+.chat__write-column input {
+  padding: 20px 10px;
+  width: 100%;
+  border: none;
+  font-size: 14px;
+}
+*/
+
+@keyframes float {
+  0% {
+    box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25),
+      0 18px 36px -18px rgba(0, 0, 0, 0.3),
+      0 -6px 36px -8px rgba(0, 0, 0, 0.025);
+  }
+  50% {
+    box-shadow: 0 30px 60px -60px rgba(50, 50, 93, 0.25),
+      0 18px 36px -18px rgba(0, 0, 0, 0.3),
+      0 -6px 36px -8px rgba(0, 0, 0, 0.025);
+  }
+  100% {
+    box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25),
+      0 18px 36px -18px rgba(0, 0, 0, 0.3),
+      0 -6px 36px -8px rgba(0, 0, 0, 0.025);
+  }
+}
+
+.chat__write {
+  margin: 0 auto;
+  bottom: 0px;
+  width: 100%;
+  border-radius: 0;
+  padding: 20px 60px;
+  border: none;
+  font-size: 14px;
+  transition: width 0.5s ease-in, border-radius 0.5s ease-in, width 0.5s ease-in;
+}
+
+.chat__write/*-column input*/:focus {
+  outline: none;
+  width: 80%;
+  transform: translateY(-100px);
+  border-radius: 40px;
+  border-radius: 40px;
+  box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25),
+    0 18px 36px -18px rgba(0, 0, 0, 0.3), 0 -6px 36px -8px rgba(0, 0, 0, 0.025);
+  animation: float 3s linear infinite forwards;
+  /*input 창 클릭하면 생기는 푸른색 아웃라인 삭제*/
+}
+
+.chat__icon {
+  font-size: 18px;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.chat__write:focus ~ .chat__icon {
+  opacity: 0;
+}
+.chat-screen .chat__messages {
+  border-top: 1px solid #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+  padding-top: 30px;
+}
+
+.chat__messages .chat__timestamp {
+  background-color: white;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 8px 16px -8px,
+    rgba(0, 0, 0, 0.024) 0px -6px 16px -6px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.message {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.messeage .message__content {
+  width: 80%;
+}
+
+.incoming-message {
+  align-self: flex-start;
+}
+
+.sent-message {
+  align-self: flex-end;
+}
+
+@keyframes spin {
+  from {
+    transform: none;
+  }
+  to {
+    transform: rotateY(1turn);
+  }
+}
+
+.incoming-message img {
+  width: 30px;
+  border-radius: 15px;
+  margin-right: 15px;
+  box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25),
+    0 8px 16px -8px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);
+  animation: spin 1s linear infinite;
+}
+
+.message .message__bubble {
+  background-color: white;
+  box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25),
+    0 8px 16px -8px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);
+  padding: 10px 20px;
+  border-radius: 30px;
+  display: block;
+  font-weight: 600;
+  color: white;
+}
+
+.incoming-message .message__author {
+  margin-top: 10px;
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.incoming-message .message__bubble {
+  border-bottom-left-radius: 0;
+  margin-bottom: 10px;
+  background-image: linear-gradient(to right, #7b4397, #dc2430);
+  /*괄호 첫번째 자리에 방향을 기재하면 그라데이션 방향 전환 가능. 디폴트는 위에서 아래*/
+}
+
+.sent-message .message__bubble {
+  border-bottom-right-radius: 0;
+  background-image: linear-gradient(to left, #00c6ff, #0072ff);
+}
+
+@keyframes incomingAnim {
+  from {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.incoming-message {
+  animation: incomingAnim 0.5s ease-out forwards;
+}
+
+@keyframes sentAnim {
+  from {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.sent-message {
+  animation: sentAnim 0.5s ease-out forwards;
+}
+
+/*forwards는 애니메이션 종료 후에도 VALUE(opacity etc.) 유지되도록 하는 것*/
